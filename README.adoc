@@ -1,0 +1,32 @@
+= Single Module Project
+ifndef::env-github[]
+:icons: font
+endif::[]
+ifdef::env-github[]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+:toc:
+:toc-placement!:
+:toclevels: 4
+
+[.text-center]
+image:https://img.shields.io/maven-central/v/org.rodnansol/single-module-project.svg[Maven Central]
+image:https://img.shields.io/badge/License-Apache_2.0-blue.svg[Apache 2.0]
+image:https://img.shields.io/twitter/url/https/twitter.com/rodnansol.svg?style=social&label=Follow%20%40RodnanSol[]
+image:https://dcbadge.vercel.app/api/server/USyh6XUjvP[Discord]
+
+toc::[]
+
+== Goals
+
+=== Introduction
+
+=== Project
+
+== Installation
+
+== Contribution
