@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.rodnansol</groupId>
-    <artifactId>single-module-project</artifactId>
+    <artifactId>asciidoctorj-extensions</artifactId>
     <version>999-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.copyright>Apache-2.0</project.copyright>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -42,11 +42,14 @@
         <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
         <jreleaser-github-release.draft>false</jreleaser-github-release.draft>
         <jreleaser-nexus-deploy.active>ALWAYS</jreleaser-nexus-deploy.active>
+        <roaster.version>2.28.0.Final</roaster.version>
+        <asciidoctorj.version>2.5.7</asciidoctorj.version>
+        <org.eclipse.jdt.core.version>3.31.0</org.eclipse.jdt.core.version>
     </properties>
 
-    <name>Single Module Project</name>
-    <description>Single Module Project Description</description>
-    <url>https://github.com/rodnansol/single-module-project</url>
+    <name>AsciiDoctorJ Extensions</name>
+    <description>AsciiDoctorJ Extensions</description>
+    <url>https://github.com/rodnansol/asciidoctorj-extensions</url>
     <inceptionYear>2023</inceptionYear>
     <developers>
         <developer>
@@ -69,7 +72,7 @@
     <scm>
         <connection>scm:git:git@${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
-        <url>git@github.com:rodnansol/single-module-project.git</url>
+        <url>git@github.com:rodnansol/asciidoctorj-extensions.git</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -86,6 +89,22 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj</artifactId>
+            <version>${asciidoctorj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.forge.roaster</groupId>
+            <artifactId>roaster-api</artifactId>
+            <version>${roaster.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.forge.roaster</groupId>
+            <artifactId>roaster-jdt</artifactId>
+            <version>${roaster.version}</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -286,7 +305,7 @@
             <id>release</id>
             <properties>
                 <ossrh.url>https://s01.oss.sonatype.org</ossrh.url>
-                <release.tags>#tags</release.tags>
+                <release.tags>#asciidoctorj #java</release.tags>
             </properties>
             <distributionManagement>
                 <snapshotRepository>

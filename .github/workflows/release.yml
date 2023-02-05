@@ -33,14 +33,13 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          java-version: 8
+          java-version: 11
           distribution: 'temurin'
           cache: 'maven'
       - name: Stage Files for Release
         run: |
           mvn versions:set -DnewVersion=$RELEASE_VERSION
           mvn -Prelease deploy -DaltDeploymentRepository=local::file:./target/staging-deploy
-          ./scripts/jbang-version-release.sh $RELEASE_VERSION
         env:
           RELEASE_VERSION: ${{ inputs.releaseVersion }}
       - name: Run JReleaser - Full Release

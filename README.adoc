@@ -1,4 +1,4 @@
-= Single Module Project
+= AsciiDoctorJ Extensions
 ifndef::env-github[]
 :icons: font
 endif::[]
@@ -14,7 +14,7 @@ endif::[]
 :toclevels: 4
 
 [.text-center]
-image:https://img.shields.io/maven-central/v/org.rodnansol/single-module-project.svg[Maven Central]
+image:https://img.shields.io/maven-central/v/org.rodnansol/asciidoctorj-extensions.svg[Maven Central]
 image:https://img.shields.io/badge/License-Apache_2.0-blue.svg[Apache 2.0]
 image:https://img.shields.io/twitter/url/https/twitter.com/rodnansol.svg?style=social&label=Follow%20%40RodnanSol[]
 image:https://dcbadge.vercel.app/api/server/USyh6XUjvP[Discord]
