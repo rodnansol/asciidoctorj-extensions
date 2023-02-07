@@ -352,7 +352,7 @@
                                         <active>ALWAYS</active>
                                         <connectTimeout>20</connectTimeout>
                                         <readTimeout>60</readTimeout>
-                                        <status>🚀 Project Name {{projectVersion}} has been released! {{releaseNotesUrl}} ${release.tags}</status>
+                                        <status>🚀 AsciidoctorJ Extensions {{projectVersion}} has been released! {{releaseNotesUrl}} ${release.tags}</status>
                                     </twitter>
                                 </announce>
                                 <release>
