@@ -304,6 +304,7 @@
         <profile>
             <id>release</id>
             <properties>
+                <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
                 <ossrh.url>https://s01.oss.sonatype.org</ossrh.url>
                 <release.tags>#asciidoctorj #java</release.tags>
             </properties>
@@ -319,6 +320,22 @@
             </distributionManagement>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>${maven-shade-plugin.version}</version>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <inherited>false</inherited>
                         <groupId>org.jreleaser</groupId>
