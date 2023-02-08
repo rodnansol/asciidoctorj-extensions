@@ -361,7 +361,6 @@
                                         <discussionCategoryName>Announcements</discussionCategoryName>
                                         <changelog>
                                             <formatted>ALWAYS</formatted>
-                                            <format>- {{commitShortHash}} {{commitTitle}}</format>
                                             <preset>conventional-commits</preset>
                                             <contributors>
                                                 <format>- {{contributorName}}</format>
