@@ -1,0 +1,113 @@
+= Showcase
+
+== Class related examples
+
+[source,java]
+----
+include::src/UserService.java[]
+----
+
+.AsciiDoc file with the include macro to extract a method
+[source,java]
+----
+include::javasource[source={docdir}/src/UserService.java,method='disableUser']
+----
+
+.AsciiDoc file with the include macro to extract a method with specific (1) space size
+[source,java]
+----
+include::javasource[source={docdir}/src/UserService.java,method='disableUser',spaceSize=1]
+----
+
+.AsciiDoc file with the include macro to extract a method with JavaDoc
+[source,java]
+----
+include::javasource[source={docdir}/src/UserService.java,method='disableUser',withJavaDoc='true']
+----
+
+.AsciiDoc file with the include macro to extract a method with parameter type list
+[source,java]
+----
+include::javasource[source={docdir}/src/UserService.java,method='deleteUser',types='String,String']
+----
+
+.AsciiDoc file with the include macro to extract a field
+[source,java]
+----
+include::javasource[source={docdir}/src/UserService.java,field='LOGGER']
+----
+
+== Interface related examples
+
+[source,java]
+----
+include::src/InterfaceTest.java[]
+----
+
+.AsciiDoc file with the include macro to extract a method
+[source,java]
+----
+include::javasource[source={docdir}/src/InterfaceTest.java,method='disableUser']
+----
+
+.AsciiDoc file with the include macro to extract a method with specific (1) space size
+[source,java]
+----
+include::javasource[source={docdir}/src/InterfaceTest.java,method='disableUser',spaceSize=1]
+----
+
+.AsciiDoc file with the include macro to extract a method with JavaDoc
+[source,java]
+----
+include::javasource[source={docdir}/src/InterfaceTest.java,method='disableUser',withJavaDoc='true']
+----
+
+.AsciiDoc file with the include macro to extract a method with parameter type list
+[source,java]
+----
+include::javasource[source={docdir}/src/InterfaceTest.java,method='deleteUser',types='String,String']
+----
+
+.AsciiDoc file with the include macro to extract a field - In case of interfaces it is not able to extract the value of it.
+[source,java]
+----
+include::javasource[source={docdir}/src/InterfaceTest.java,field='ERROR_CODE']
+----
+
+
+== Enum related examples
+
+[source,java]
+----
+include::src/TestEnum.java[]
+----
+
+.AsciiDoc file with the include macro to extract a method
+[source,java]
+----
+include::javasource[source={docdir}/src/TestEnum.java,method='getCustomValue']
+----
+
+.AsciiDoc file with the include macro to extract a method with specific (1) space size
+[source,java]
+----
+include::javasource[source={docdir}/src/TestEnum.java,method='getCustomValue',spaceSize=1]
+----
+
+.AsciiDoc file with the include macro to extract a method with JavaDoc
+[source,java]
+----
+include::javasource[source={docdir}/src/TestEnum.java,method='getCustomValue',withJavaDoc='true']
+----
+
+.AsciiDoc file with the include macro to extract a method with parameter type list
+[source,java]
+----
+include::javasource[source={docdir}/src/TestEnum.java,method='getEnumByValue',types='int,String']
+----
+
+.AsciiDoc file with the include macro to extract a field - In case of interfaces it is not able to extract the value of it.
+[source,java]
+----
+include::javasource[source={docdir}/src/TestEnum.java,field='FIRST']
+----

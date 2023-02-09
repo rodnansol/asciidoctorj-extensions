@@ -47,7 +47,7 @@ include::javasource[source='<path-to-java-source>', <.>
 method='<name-of-the-method-to-extract>', field='<name-of-the-field-to-extract>', <.>
 withJavaDoc='true|false', <.>
 spaceSize='<space-size>' <.>
-lineLenght='<maximum-line-length>' <.>
+lineLength='<maximum-line-length>' <.>
 ]
 ----
 1. Path to the source code.
@@ -108,7 +108,7 @@ class UserService {
 .AsciiDoc file with the include macro to extract a method
 [source,adoc]
 ----
-\include::javasource[source={domvn mcdir}/UserService.java,method='disableUser']
+\include::javasource[source={docdir}/UserService.java,method='disableUser']
 ----
 
 .Result
@@ -132,6 +132,11 @@ image::docs/extracted-method-with-javadoc.png[]
 .Result
 image::docs/extracted-field.png[]
 ====
+
+
+Check the link:docs/showcase.html[following file]  for a full showcase.
+
+NOTE: Because the requested source code is being formatted with Roaster's Eclipse formatter it can happen that the final code does not look the same as the original.
 
 == Usage
 
