@@ -1,4 +1,4 @@
-package org.rodnansol.asciidoctorj;
+package org.rodnansol.asciidoctorj.javasource;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -55,11 +55,11 @@ class JavaSourceHelperTest {
             arguments("createUser","public final User createUser(String username, String password) {\n" +
                 "    LOGGER.info(\"Creating new user with username:[{}]\", username);\n" +
                 "    userRepository.save(new User(username, password));\n" +
-                "}",(Object) new String[]{"String","String"}),
+                "}", new String[]{"String","String"}),
             arguments("deleteUser","protected void deleteUser(String username) {\n" +
                 "    LOGGER.info(\"Deleting user with username:[{}]\", username);\n" +
                 "    userRepository.deleteByUsername(username);\n" +
-                "}",(Object) new String[]{"String"}),
+                "}", new String[]{"String"}),
             arguments("disableUser","void disableUser(User user) {\n" +
                 "    LOGGER.info(\"Disabling user with username:[{}]\", user.username);\n" +
                 "    if (user.enabled == true) {\n" +
@@ -68,7 +68,7 @@ class JavaSourceHelperTest {
                 "    } else {\n" +
                 "        logUnableToDisableUser();\n" +
                 "    }\n" +
-                "}",(Object) new String[]{"User"}),
+                "}", new String[]{"User"}),
             arguments("logUnableToDisableUser","private static void logUnableToDisableUser() {\n" +
                 "    LOGGER.info(\"Unable to disable disabled user\");\n" +
                 "}", new String[]{})

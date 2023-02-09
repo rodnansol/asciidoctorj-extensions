@@ -1,4 +1,4 @@
-package org.rodnansol.asciidoctorj;
+package org.rodnansol.asciidoctorj.javasource;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -26,7 +26,7 @@ public class ExtractMethodCommand extends ExtractCommand {
      * @param spaceSize      space size for indentation.
      * @param methodName     method's name that should be extracted from the source code.
      * @param withJavaDoc    if the JavaDoc should be included or not.
-     * @param lineLength
+     * @param lineLength     maximum length of the line.
      * @param paramTypes     list of the method argument types in String values.
      */
     public ExtractMethodCommand(String sourceCodePath, int spaceSize, String methodName, boolean withJavaDoc, int lineLength, String... paramTypes) {

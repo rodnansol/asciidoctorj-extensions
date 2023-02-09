@@ -1,4 +1,4 @@
-package org.rodnansol.asciidoctorj;
+package org.rodnansol.asciidoctorj.javasource;
 
 /**
  * Exception to be thrown when the Java Source code can not be extracted.

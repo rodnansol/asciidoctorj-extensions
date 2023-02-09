@@ -1,4 +1,4 @@
-package org.rodnansol.asciidoctorj;
+package org.rodnansol.asciidoctorj.javasource;
 
 import java.util.Objects;
 

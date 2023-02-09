@@ -1,4 +1,4 @@
-package org.rodnansol.asciidoctorj;
+package org.rodnansol.asciidoctorj.javasource;
 
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster._shade.org.apache.commons.lang3.StringUtils;

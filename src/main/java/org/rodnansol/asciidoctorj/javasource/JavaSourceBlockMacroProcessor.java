@@ -1,4 +1,4 @@
-package org.rodnansol.asciidoctorj;
+package org.rodnansol.asciidoctorj.javasource;
 
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.extension.BlockMacroProcessor;
@@ -20,7 +20,6 @@ public class JavaSourceBlockMacroProcessor extends BlockMacroProcessor {
     @Override
     public Object process(StructuralNode parent, String target, Map<String, Object> attributes) {
         try {
-            System.out.println("### ATTRIBUTES:" + parent.getAttributes());
             String method = JavaSourceHelper.getMethod(target, (String) attributes.get("method"));
             String content = new StringBuilder()
                 .append("<div class=\"listingblock\">\n")

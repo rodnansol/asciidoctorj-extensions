@@ -1,4 +1,4 @@
-package org.rodnansol.asciidoctorj;
+package org.rodnansol.asciidoctorj.javasource;
 
 import java.util.Objects;
 
@@ -21,8 +21,8 @@ public class ExtractFieldCommand extends ExtractCommand {
      * @param sourceCodePath Java source file's path.
      * @param fieldName      field name to extract.
      * @param spaceSize      space size for indentation.
-     * @param withJavaDoc
-     * @param lineLength
+     * @param withJavaDoc    if the JavaDoc should be included or not.
+     * @param lineLength     maximum length of the line.
      */
     public ExtractFieldCommand(String sourceCodePath, String fieldName, int spaceSize, boolean withJavaDoc, int lineLength) {
         super(sourceCodePath, spaceSize, withJavaDoc, lineLength);

@@ -1,11 +1,13 @@
-package org.rodnansol.asciidoctorj;
+package org.rodnansol.asciidoctorj.javasource;
 
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.extension.IncludeProcessor;
 import org.asciidoctor.extension.PreprocessorReader;
+import org.jboss.forge.roaster._shade.org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +36,9 @@ import java.util.Map;
  * @author nandorholozsnyak
  * @since 0.1.0
  */
-public class JavaMethodIncludeProcessor extends IncludeProcessor {
+public class JavaSourceIncludeProcessor extends IncludeProcessor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JavaMethodIncludeProcessor.class);
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(JavaSourceIncludeProcessor.class);
     private static final String MACRO_JAVASOURCE = "javasource";
     private static final String KEY_SOURCE = "source";
     private static final String KEY_SPACE_SIZE = "spaceSize";
@@ -46,11 +47,11 @@ public class JavaMethodIncludeProcessor extends IncludeProcessor {
 
     private final List<CodeBlockProcessor> codeBlockProcessorList;
 
-    public JavaMethodIncludeProcessor() {
+    public JavaSourceIncludeProcessor() {
         this(Arrays.asList(new JavaMethodCodeBlockProcessor(), new JavaFieldCodeBlockProcessor()));
     }
 
-    public JavaMethodIncludeProcessor(List<CodeBlockProcessor> codeBlockProcessorList) {
+    public JavaSourceIncludeProcessor(List<CodeBlockProcessor> codeBlockProcessorList) {
         this.codeBlockProcessorList = codeBlockProcessorList;
     }
 
@@ -69,15 +70,37 @@ public class JavaMethodIncludeProcessor extends IncludeProcessor {
         if (source == null || source.isEmpty()) {
             throw new JavaSourceCodeExtractionException("'source' attribute is empty.");
         }
-        int spaceSize = Integer.parseInt((String) attributes.getOrDefault(KEY_SPACE_SIZE, String.valueOf(JavaSourceHelper.DEFAULT_SPACE_SIZE)));
-        int lineLength = Integer.parseInt((String) attributes.getOrDefault(KEY_LINE_LENGTH, String.valueOf(JavaSourceHelper.DEFAULT_LINE_LENGTH)));
+        String spaceSizeRawValue = (String) attributes.get(KEY_SPACE_SIZE);
+        String keyLineLengthRaw = (String) attributes.get(KEY_LINE_LENGTH);
+        int spaceSize = Integer.parseInt(StringUtils.isEmpty(spaceSizeRawValue) ? String.valueOf(JavaSourceHelper.DEFAULT_SPACE_SIZE) : spaceSizeRawValue);
+        int lineLength = Integer.parseInt(StringUtils.isEmpty(keyLineLengthRaw) ? String.valueOf(JavaSourceHelper.DEFAULT_LINE_LENGTH) : keyLineLengthRaw);
         boolean withJavaDoc = Boolean.parseBoolean((String) attributes.getOrDefault(KEY_WITH_JAVA_DOC, "false"));
         ExtractCommand extractCommand = new ExtractCommand(source, spaceSize, withJavaDoc, lineLength);
         LOGGER.debug("Extracting items from source code with basic command:[{}]", extractCommand);
-        codeBlockProcessorList.stream()
-            .filter(codeBlockProcessor -> codeBlockProcessor.isActive(attributes))
-            .findFirst()
-            .ifPresent(codeBlockProcessor -> codeBlockProcessor.process(extractCommand, document, reader, target, attributes));
+        try {
+            codeBlockProcessorList.stream()
+                .filter(codeBlockProcessor -> codeBlockProcessor.isActive(attributes))
+                .findFirst()
+                .ifPresentOrElse(processor -> processor.process(extractCommand, document, reader, target, attributes),
+                    () -> LOGGER.warn("No processor was found to handle incoming request for command:[{}]", extractCommand));
+        } catch (Exception e) {
+            renderErrorMessage(reader, target, attributes, e);
+        }
 
+    }
+
+    private void renderErrorMessage(PreprocessorReader reader, String target, Map<String, Object> attributes, Exception exception) {
+        StringBuilder errorMessageBuilder = new StringBuilder()
+            .append("Unable to render the requested block, please see the stack trace for more information.\n\n")
+            .append("Error message: ").append(exception.getMessage()).append(" \n");
+        if (exception.getCause() != null) {
+            errorMessageBuilder.append("Original error message: ").append(exception.getCause().getMessage()).append(" \n");
+        }
+        reader.pushInclude(
+            errorMessageBuilder.toString(),
+            target,
+            new File(".").getAbsolutePath(),
+            1,
+            attributes);
     }
 }

@@ -20,6 +20,10 @@ class UserService {
         userRepository.deleteByUsername(username);
     }
 
+    /**
+     * Disables the incoming user.
+     * @param user user to disable.
+     */
     void disableUser(User user) {
         LOGGER.info("Disabling user with username:[{}]", user.username);
         if (user.enabled == true) {
