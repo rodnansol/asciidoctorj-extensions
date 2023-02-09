@@ -302,22 +302,10 @@
 
     <profiles>
         <profile>
-            <id>release</id>
+            <id>shade</id>
             <properties>
                 <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
-                <ossrh.url>https://s01.oss.sonatype.org</ossrh.url>
-                <release.tags>#asciidoctorj #java</release.tags>
             </properties>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>${ossrh.url}/content/repositories/snapshots</url>
-                </snapshotRepository>
-                <repository>
-                    <id>ossrh</id>
-                    <url>${ossrh.url}/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
             <build>
                 <plugins>
                     <plugin>
@@ -336,6 +324,27 @@
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <properties>
+                <ossrh.url>https://s01.oss.sonatype.org</ossrh.url>
+                <release.tags>#asciidoctorj #java</release.tags>
+            </properties>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>${ossrh.url}/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>${ossrh.url}/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+            <build>
+                <plugins>
                     <plugin>
                         <inherited>false</inherited>
                         <groupId>org.jreleaser</groupId>
