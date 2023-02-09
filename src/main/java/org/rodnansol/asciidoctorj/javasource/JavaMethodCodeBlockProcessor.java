@@ -22,6 +22,12 @@ public class JavaMethodCodeBlockProcessor implements CodeBlockProcessor {
     private static final String KEY_METHOD = "method";
     private static final String KEY_METHOD_PARAM_TYPES = "types";
 
+    private final JavaSourceService javaSourceService;
+
+    public JavaMethodCodeBlockProcessor(JavaSourceService javaSourceService) {
+        this.javaSourceService = javaSourceService;
+    }
+
     @Override
     public boolean isActive(Map<String, Object> attributes) {
         return attributes.containsKey(KEY_METHOD);
@@ -31,10 +37,10 @@ public class JavaMethodCodeBlockProcessor implements CodeBlockProcessor {
     public void process(ExtractCommand extractCommand, Document document, PreprocessorReader reader, String target, Map<String, Object> attributes) {
         String method = (String) attributes.get(KEY_METHOD);
         try {
-            String paramTypeList = (String) attributes.getOrDefault(KEY_METHOD_PARAM_TYPES, "");
-            String[] paramTypes = paramTypeList.split(",");
-            LOGGER.info("Extracting method:[{}] with type list:[{}] from source code at path:[{}]", method, paramTypeList, extractCommand.getSourceCodePath());
-            String fullMethod = JavaSourceHelper.getMethod(new ExtractMethodCommand(extractCommand, method, paramTypes));
+            String paramTypeList = (String) attributes.get(KEY_METHOD_PARAM_TYPES);
+            String[] paramTypes = paramTypeList != null ? paramTypeList.split(",") : null;
+            LOGGER.info("Extracting method:[{}] with type list:[{}] from source code at path:[{}]", method, paramTypes, extractCommand.getSourceCodePath());
+            String fullMethod = javaSourceService.getMethod(new ExtractMethodCommand(extractCommand, method, paramTypes));
 
             reader.pushInclude(
                 fullMethod,

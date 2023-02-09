@@ -44,11 +44,10 @@ public class JavaSourceIncludeProcessor extends IncludeProcessor {
     private static final String KEY_SPACE_SIZE = "spaceSize";
     private static final String KEY_WITH_JAVA_DOC = "withJavaDoc";
     private static final String KEY_LINE_LENGTH = "lineLength";
-
     private final List<CodeBlockProcessor> codeBlockProcessorList;
 
     public JavaSourceIncludeProcessor() {
-        this(Arrays.asList(new JavaMethodCodeBlockProcessor(), new JavaFieldCodeBlockProcessor()));
+        this(Arrays.asList(new JavaMethodCodeBlockProcessor(JavaSourceService.INSTANCE), new JavaFieldCodeBlockProcessor(JavaSourceService.INSTANCE)));
     }
 
     public JavaSourceIncludeProcessor(List<CodeBlockProcessor> codeBlockProcessorList) {
@@ -72,8 +71,8 @@ public class JavaSourceIncludeProcessor extends IncludeProcessor {
         }
         String spaceSizeRawValue = (String) attributes.get(KEY_SPACE_SIZE);
         String keyLineLengthRaw = (String) attributes.get(KEY_LINE_LENGTH);
-        int spaceSize = Integer.parseInt(StringUtils.isEmpty(spaceSizeRawValue) ? String.valueOf(JavaSourceHelper.DEFAULT_SPACE_SIZE) : spaceSizeRawValue);
-        int lineLength = Integer.parseInt(StringUtils.isEmpty(keyLineLengthRaw) ? String.valueOf(JavaSourceHelper.DEFAULT_LINE_LENGTH) : keyLineLengthRaw);
+        int spaceSize = Integer.parseInt(StringUtils.isEmpty(spaceSizeRawValue) ? String.valueOf(JavaSourceService.DEFAULT_SPACE_SIZE) : spaceSizeRawValue);
+        int lineLength = Integer.parseInt(StringUtils.isEmpty(keyLineLengthRaw) ? String.valueOf(JavaSourceService.DEFAULT_LINE_LENGTH) : keyLineLengthRaw);
         boolean withJavaDoc = Boolean.parseBoolean((String) attributes.getOrDefault(KEY_WITH_JAVA_DOC, "false"));
         ExtractCommand extractCommand = new ExtractCommand(source, spaceSize, withJavaDoc, lineLength);
         LOGGER.debug("Extracting items from source code with basic command:[{}]", extractCommand);
@@ -84,6 +83,7 @@ public class JavaSourceIncludeProcessor extends IncludeProcessor {
                 .ifPresentOrElse(processor -> processor.process(extractCommand, document, reader, target, attributes),
                     () -> LOGGER.warn("No processor was found to handle incoming request for command:[{}]", extractCommand));
         } catch (Exception e) {
+            LOGGER.error("Error during creating source code block...", e);
             renderErrorMessage(reader, target, attributes, e);
         }
 

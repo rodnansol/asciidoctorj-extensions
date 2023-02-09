@@ -17,10 +17,16 @@ import java.util.Map;
 @Name("javasource")
 public class JavaSourceBlockMacroProcessor extends BlockMacroProcessor {
 
+    private final JavaSourceService javaSourceService;
+
+    public JavaSourceBlockMacroProcessor() {
+        this.javaSourceService = JavaSourceService.INSTANCE;
+    }
+
     @Override
     public Object process(StructuralNode parent, String target, Map<String, Object> attributes) {
         try {
-            String method = JavaSourceHelper.getMethod(target, (String) attributes.get("method"));
+            String method = javaSourceService.getMethod(target, (String) attributes.get("method"));
             String content = new StringBuilder()
                 .append("<div class=\"listingblock\">\n")
                 .append("<div class=\"content\">\n")

@@ -20,6 +20,11 @@ public class JavaFieldCodeBlockProcessor implements CodeBlockProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(JavaFieldCodeBlockProcessor.class);
 
     private static final String KEY_FIELD = "field";
+    private final JavaSourceService javaSourceService;
+
+    public JavaFieldCodeBlockProcessor(JavaSourceService javaSourceService) {
+        this.javaSourceService = javaSourceService;
+    }
 
     @Override
     public boolean isActive(Map<String, Object> attributes) {
@@ -32,7 +37,7 @@ public class JavaFieldCodeBlockProcessor implements CodeBlockProcessor {
         if (field != null && !field.isEmpty()) {
             LOGGER.info("Extracting field:[{}] from source code at path:[{}]", field, extractCommand.getSourceCodePath());
             try {
-                String fullField = JavaSourceHelper.getField(new ExtractFieldCommand(extractCommand, field));
+                String fullField = javaSourceService.getField(new ExtractFieldCommand(extractCommand, field));
                 reader.pushInclude(
                     fullField,
                     target,
